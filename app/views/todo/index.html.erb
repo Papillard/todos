@@ -1,0 +1,56 @@
+<br>
+<br>
+
+<h1>To-do's</h1>
+
+<div ng-controller="TodoController">
+	
+		
+	<form name="todoForm" ng-submit="addEntry()" class="form-inline">
+		<input type="text" name="inputTask" ng-model="newEntry.name" autofocus required>
+		
+		<select ng-model="newEntry.priority">
+			<option value="1">Mouai</option>
+		  	<option value="2">Trankil</option>
+		  	<option value="3">A regarder</option>
+		  	<option value="4">Ca chauffe !</option>
+			<option value="5">Ca urge !!</option>	
+		</select>
+		
+		<input type="submit" value="Submit" class="btn btn-primary">
+		
+	</form>
+	
+	<hr>
+	<br>
+	<br>
+	
+	<div class="row-fluid">
+		<div class="span4 offset4">
+			<button class="btn btn-success" ng-click="tri = 'priority'; reverse = !reverse">Trier par urgence</button>
+		</div>
+	</div>
+	
+	<br>
+	<br>
+
+	<div class="row-fluid todo" ng-repeat="entry in entries | orderBy:tri:reverse">
+		<div class="span4">
+			<h4>{{entry.name}}</h4>
+		</div>
+		<div class="span3 star-container">
+			{{entry.priority | stars}}
+		</div>
+		<div class="span1">
+			<div ng-show="entry.done"><%= image_tag "check.svg", class: "img-check"%></div>
+			<div ng-show="!entry.done"><%= image_tag "not-check.svg", class: "img-check"%></div>
+		</div>
+		<div class="span2">	
+			<button class="btn btn-danger pull-right mark-btn" ng-click="deleteTask($index)">Delete</button>
+		</div>
+		<div class="span2">	
+			<button class="btn btn-warning pull-right mark-btn" ng-click="markAsDone($index)">Mark</button>
+		</div>
+	</div>
+	
+</div>
